@@ -121,21 +121,16 @@ async def filebot_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         user = update.effective_user
         username = user.username if user.username else user.first_name
         await update.message.reply_text(
-            f"Привет, {username}! Доступные команды:\n"
-            "/adm — админ-панель постинга и bot\n"
-            "/list — Список загруженных файлов\n"
-            "/info N — Инфо по файлу\n"
-            "/clear — Очистить базу файлов\n"
-            "/del N — Удалить файл с номером N\n"
-            "Отправь .apk документ — получишь ссылку!"
+            f"Привет, {username}!\n"
+            "Это Бот для выдачи файлов с канала.\n"
+            "@ANDRO_FILE"
         )
 
 # ------- БЛОК АДМИНКИ -------
 def render_post(post):
     return (
-        f"<b>______________________</b>\n"  # Верхняя линия
         f"<b>{post['title']}</b>\n"
-        f"<b>=========================</b>\n"  # Нижняя линия с "==="
+        f"<b>________________________________</b>\n"  # Верхняя линия
         f"📝 <b>Описание:</b>\n"
         f"{post['description']}\n"
         f"<b>=========================</b>"  # Нижняя линия с "===" в конце
@@ -192,7 +187,7 @@ async def adm_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "description": "",
         "buttons": []
     }
-    await update.message.reply_text("🔹 Отправьте картинку для поста или /skip")
+    await update.message.reply_text("🔹 Отправьте картинку для поста.")
     return ADD_PHOTO
 
 async def add_photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -242,7 +237,7 @@ async def admin_panel(update: Update, context: ContextTypes.DEFAULT_TYPE):
     post = context.user_data['post']
 
     if query.data == "set_photo":
-        await query.edit_message_text("Отправьте новую картинку или /skip")
+        await query.edit_message_text("Отправьте новую картинку.")
         return ADD_PHOTO
 
     if query.data == "set_title":
@@ -361,7 +356,7 @@ def main():
     app = Application.builder().token(TELEGRAM_TOKEN).build()
 
     conv = ConversationHandler(
-        entry_points=[CommandHandler('adm', adm_cmd)],
+        entry_points=[CommandHandler('post', adm_cmd)],
         states={
             ADD_PHOTO: [MessageHandler(filters.PHOTO, add_photo),
                         MessageHandler(filters.TEXT & filters.Regex("^/skip$"), add_photo)],
@@ -391,3 +386,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
