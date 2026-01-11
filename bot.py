@@ -10,9 +10,9 @@ from telegram.ext import (
 )
 
 # ======= НАСТРОЙКИ =======
-TELEGRAM_TOKEN = "8503713213:AAFw2fj83nqOTIGz6XBEfYfNYs0P3DvKNxY"
-ADMIN_ID = 1129009422         # Ваш user id (число)
-CHANNEL_ID = -1002329753497  # id канала/чата для публикации постов
+TELEGRAM_TOKEN = ""
+ADMIN_ID =?         # Ваш user id (число)
+CHANNEL_ID =? # id канала/чата для публикации постов
 FILE_DB = "file_db.json"
 SIGNATURE = "@M_FileBot"
 IMAGES_DIR = "admin_images"
